@@ -1,0 +1,29 @@
+================================================================================
+OIL INDIA LIMITED - INFRASTRUCTURE PROJECT MONITORING
+DAILY PROGRESS REPORT (DPR) #142
+Project: Duliajan to Numaligarh Crude Dispatch Terminal (PS-04)
+Report Date: 2026-11-08 | Shift: Day Shift (07:00 - 18:00)
+Weather: Overcast with morning drizzle (temp 24C) | Manpower at Site: 64 pax
+================================================================================
+
+1. CIVIL ENGINEERING DISCIPLINE:
+- Pump House Area: Foundation Pad P-12 curing concluded today. QC team issued clearance certificate after 7-day wet burlap test. Formwork stripped and backfilling commenced.
+- Tank Farm Area: Crude Storage Tank TK-101 ring beam foundation excavation reached 70% depth. Rain slowed muck disposal by 2 hours.
+- Substation Corridor: Cable trench excavation C-1 completed up to chainage 0+240.
+
+2. PIPING & MECHANICAL DISCIPLINE:
+- Manifold Yard: Piping crew mobilized at Pipe Rack PR-04. Erection of 24-inch crude oil spools on line 24-CW-001 in progress. 
+  Specific progress: 6 out of 8 spools placed and pinned on steel brackets (approx 75% complete).
+  Delay Notice: Further spool placement halted at 15:30 due to hydraulic line rupture on 50T mobile crane. Crane vendor technician called for spare replacement hose.
+- Pump House: Booster Pump P-101A baseplate aligned and grouting started using Conbextra GP2 non-shrink grout.
+
+3. ELECTRICAL & INSTRUMENTATION:
+- Substation Yard: Laying sand bedding and pulling 11kV HT power cable along Tray B. Pulled 240 meters out of 500m total run. 
+- Control Room: PLC cabinet marshalling rack arrived. Unpacking and tagging started.
+
+4. HEALTH, SAFETY & ENVIRONMENT (HSE):
+- Zero LTI reported. Tool Box Talk conducted on crane rigging safety and heavy lift rigging protocols. 1 near-miss logged (loose sling shackle).
+
+5. CRITICAL BOTTLENECKS & DELAY CALLOUTS:
+[DELAY-01] Category: Operational | Spool erection on line 24-CW-001 stopped early due to mobile crane hydraulic failure. Estimated recovery: 24 hours.
+[DELAY-02] Category: Material | Flange gaskets for discharge manifold 16-DIS-002 pending dispatch from Guwahati warehouse.

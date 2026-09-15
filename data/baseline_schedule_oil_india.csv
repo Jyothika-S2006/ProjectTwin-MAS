@@ -1,0 +1,28 @@
+Activity_ID,WBS_Level,WBS_Code,Activity_Name,Discipline,Planned_Start,Planned_Finish,Planned_Duration_Days,Predecessors,Weightage,Unit_Area
+ACT-CIV-001,L5,1.1.1,Clear Site and Mobilize Excavation Equipment,Civil,2026-10-01,2026-10-05,5,,2.0,Tank Farm Area
+ACT-CIV-002,L5,1.1.2,Excavation and Soil Compaction for Pump House Foundation,Civil,2026-10-06,2026-10-14,9,ACT-CIV-001,4.5,Pump House
+ACT-CIV-003,L6,1.1.3,Rebar Binding and Shuttering for Foundation Pad P-12,Civil,2026-10-15,2026-10-21,7,ACT-CIV-002,3.5,Pump House
+ACT-CIV-004,L6,1.1.4,Pour M35 Reinforced Concrete for Foundation Pad P-12,Civil,2026-10-22,2026-10-25,4,ACT-CIV-003,4.0,Pump House
+ACT-CIV-005,L5,1.1.5,Curing and Foundation Inspection Pad P-12,Civil,2026-10-26,2026-11-02,8,ACT-CIV-004,2.0,Pump House
+ACT-CIV-006,L5,1.2.1,Excavate and Cast Crude Storage Tank TK-101 Ring Beam Foundation,Civil,2026-10-10,2026-10-28,19,ACT-CIV-001,6.0,Tank Farm Area
+ACT-CIV-007,L6,1.3.1,Excavate Underground Cable Trench Corridor C-1,Civil,2026-10-16,2026-10-24,9,ACT-CIV-001,2.5,Substation Yard
+ACT-EQP-001,L5,2.1.1,Erect and Grout Main Crude Booster Pump P-101A on Pad P-12,Mechanical,2026-11-03,2026-11-10,8,ACT-CIV-005,5.0,Pump House
+ACT-EQP-002,L5,2.1.2,Erect and Grout Standby Crude Booster Pump P-101B on Pad P-12,Mechanical,2026-11-08,2026-11-15,8,ACT-CIV-005,5.0,Pump House
+ACT-EQP-003,L5,2.2.1,Plate Erection and Welding for Crude Storage Tank TK-101,Mechanical,2026-10-29,2026-11-25,28,ACT-CIV-006,8.0,Tank Farm Area
+ACT-PIP-101,L5,3.1.1,Fabricate Line 24-CW-001 24-inch Crude Oil Pipe Spools,Piping,2026-10-15,2026-10-30,16,,4.0,Fab Yard
+ACT-PIP-102,L6,3.1.2,NDT and Hydrotest Fabricated Spools for Line 24-CW-001,Piping,2026-10-31,2026-11-05,6,ACT-PIP-101,2.5,Fab Yard
+ACT-PIP-103,L5,3.1.3,Install Pipe Rack Steel Support Module PR-04,Piping,2026-10-20,2026-10-30,11,ACT-CIV-002,3.0,Manifold Yard
+ACT-PIP-104,L6,3.1.4,Erect Line 24-CW-001 Spool on Pipe Rack PR-04,Piping,2026-11-06,2026-11-16,11,ACT-PIP-102;ACT-PIP-103,6.5,Manifold Yard
+ACT-PIP-105,L6,3.1.5,Fit-up and Weld Golden Joint GJ-04 on Line 24-CW-001,Piping,2026-11-17,2026-11-22,6,ACT-PIP-104,3.0,Manifold Yard
+ACT-PIP-106,L5,3.2.1,Erect Line 16-DIS-002 Discharge Manifold to Pump P-101A,Piping,2026-11-11,2026-11-20,10,ACT-EQP-001,4.5,Pump House
+ACT-PIP-107,L5,3.2.2,Erect Line 16-DIS-003 Discharge Manifold to Pump P-101B,Piping,2026-11-16,2026-11-25,10,ACT-EQP-002,4.5,Pump House
+ACT-PIP-108,L5,3.3.1,System Hydrostatic Pressure Testing for Line 24-CW-001,Piping,2026-11-23,2026-11-28,6,ACT-PIP-105,4.0,Manifold Yard
+ACT-ELE-201,L5,4.1.1,Lay Sand Bedding and Pull 11kV Power Feeder Cable in Cable Tray B,Electrical,2026-10-25,2026-11-05,12,ACT-CIV-007,4.0,Substation Yard
+ACT-ELE-202,L6,4.1.2,Terminate 11kV Feeder Cable at Motor Control Center MCC-01,Electrical,2026-11-06,2026-11-12,7,ACT-ELE-201,3.0,Substation Yard
+ACT-ELE-203,L5,4.2.1,Hook up Power Supply Cable to Booster Pump Motor P-101A,Electrical,2026-11-13,2026-11-18,6,ACT-EQP-001;ACT-ELE-202,3.5,Pump House
+ACT-ELE-204,L5,4.2.2,Install Substation Earthing Grid and Grounding Rods,Electrical,2026-10-20,2026-11-01,13,ACT-CIV-007,3.0,Substation Yard
+ACT-INS-301,L5,5.1.1,Install Ultrasonic Flow Meter FT-101 on Line 24-CW-001,Instrumentation,2026-11-18,2026-11-24,7,ACT-PIP-104,3.0,Manifold Yard
+ACT-INS-302,L6,5.1.2,Run Twisted Shielded Instrument Signal Cable to PLC Cabinet,Instrumentation,2026-11-15,2026-11-22,8,ACT-ELE-201,3.0,Control Room
+ACT-INS-303,L5,5.2.1,Calibrate Pressure Transmitter PT-204 at Pump Discharge,Instrumentation,2026-11-21,2026-11-26,6,ACT-PIP-106,2.5,Pump House
+ACT-HSE-401,L5,6.1.1,Install Deluge Fire Protection Spray Piping and Hydrant Ring,HSE,2026-11-01,2026-11-20,20,ACT-CIV-006,4.0,Tank Farm Area
+ACT-COM-501,L4,7.1.1,Integrated Hydrocarbon Pre-Commissioning and Loop Check,Commissioning,2026-11-29,2026-12-08,10,ACT-PIP-108;ACT-ELE-203;ACT-INS-301,6.0,Plant Wide
