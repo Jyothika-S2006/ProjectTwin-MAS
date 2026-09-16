@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://www.primavera.com/pm/xml">
+  <ProjectHeader>
+    <ProjectId>OIL-DUL-026</ProjectId>
+    <ProjectName>Duliajan-Numaligarh Crude Oil Pumping Station &amp; Pipeline Terminal</ProjectName>
+    <Organization>Oil India Limited</Organization>
+    <CreationDate>2026-09-15T00:00:00</CreationDate>
+  </ProjectHeader>
+  <Activities>
+    <Activity>
+      <Id>ACT-CIV-001</Id>
+      <Name>Clear Site and Mobilize Excavation Equipment</Name>
+      <WBSCode>1.1.1</WBSCode>
+      <Discipline>Civil</Discipline>
+      <PlannedStartDate>2026-10-01</PlannedStartDate>
+      <PlannedFinishDate>2026-10-05</PlannedFinishDate>
+      <DurationDays>5</DurationDays>
+      <Weightage>2.0</Weightage>
+    </Activity>
+    <Activity>
+      <Id>ACT-PIP-104</Id>
+      <Name>Erect Line 24-CW-001 Spool on Pipe Rack PR-04</Name>
+      <WBSCode>3.1.4</WBSCode>
+      <Discipline>Piping</Discipline>
+      <PlannedStartDate>2026-11-06</PlannedStartDate>
+      <PlannedFinishDate>2026-11-16</PlannedFinishDate>
+      <DurationDays>11</DurationDays>
+      <Predecessors>ACT-PIP-102;ACT-PIP-103</Predecessors>
+      <Weightage>6.5</Weightage>
+    </Activity>
+    <Activity>
+      <Id>ACT-ELE-201</Id>
+      <Name>Lay Sand Bedding and Pull 11kV Power Feeder Cable in Cable Tray B</Name>
+      <WBSCode>4.1.1</WBSCode>
+      <Discipline>Electrical</Discipline>
+      <PlannedStartDate>2026-10-25</PlannedStartDate>
+      <PlannedFinishDate>2026-11-05</PlannedFinishDate>
+      <DurationDays>12</DurationDays>
+      <Predecessors>ACT-CIV-007</Predecessors>
+      <Weightage>4.0</Weightage>
+    </Activity>
+  </Activities>
+</Project>

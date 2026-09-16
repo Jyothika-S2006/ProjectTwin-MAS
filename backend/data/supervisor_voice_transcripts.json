@@ -1,0 +1,38 @@
+[
+  {
+    "supervisor": "Raman Borah",
+    "discipline": "Piping",
+    "timestamp": "2026-11-08T16:15:00+05:30",
+    "location": "Manifold Yard Rack 4",
+    "audio_clip_id": "VOICE-PIP-0811-01",
+    "transcript": "Hello control room, Raman here from Piping. We have completed spool erection on line 24-CW-001 up to spool SP-106 on rack 4. Out of 8 spools, 6 are erected and bolted. Remaining two cannot be lifted today because the 50-ton mobile crane hydraulic line ruptured. Crane mechanic is on site, expecting hose replacement by tomorrow 10 AM. Current progress roughly seventy-five percent.",
+    "expected_link": "ACT-PIP-104"
+  },
+  {
+    "supervisor": "Debojit Saikia",
+    "discipline": "Civil",
+    "timestamp": "2026-11-08T17:30:00+05:30",
+    "location": "Pump House",
+    "audio_clip_id": "VOICE-CIV-0811-02",
+    "transcript": "Civil supervisor Debojit reporting. Curing and final foundation inspection for Booster Pump Pad P-12 is hundred percent complete today. Client QC has signed off the test cube reports. Mechanical team can take over for pump positioning anytime from tomorrow.",
+    "expected_link": "ACT-CIV-005"
+  },
+  {
+    "supervisor": "Bikash Gogoi",
+    "discipline": "Electrical",
+    "timestamp": "2026-11-08T18:00:00+05:30",
+    "location": "Substation Yard",
+    "audio_clip_id": "VOICE-ELE-0811-03",
+    "transcript": "Bikash from Electrical side. We pulled two hundred and forty meters of eleven kV power cable in tray B along the trench today. Total run is five hundred meters, so progress is about forty-eight percent. Sand bedding was laid in the morning shift.",
+    "expected_link": "ACT-ELE-201"
+  },
+  {
+    "supervisor": "Anup Baruah",
+    "discipline": "Piping",
+    "timestamp": "2026-11-09T11:00:00+05:30",
+    "location": "Pump House Discharge",
+    "audio_clip_id": "VOICE-PIP-0911-04",
+    "transcript": "Piping crew tried to start fit-up of pump discharge line 16-DIS-002, but the required three hundred pound spiral wound gaskets have not arrived from store. Activity is stalled waiting for material clearance.",
+    "expected_link": "ACT-PIP-106"
+  }
+]

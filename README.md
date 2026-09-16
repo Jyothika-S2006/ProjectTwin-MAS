@@ -1,4 +1,4 @@
-﻿# ProjectTwin: Intelligent Data Capture & Schedule-Linking Layer
+# ProjectTwin: Intelligent Data Capture & Schedule-Linking Layer
 ### Smart India Hackathon 2026 | Problem Statement ID: SIH26122
 **Organization**: Oil India Limited  
 **Category**: Software | **Theme**: Smart Automation  
@@ -33,7 +33,37 @@ While the baseline plan is defined in Primavera P6 or MS Project, actual executi
 
 ---
 
-## 3. Confidence-Based Decision Routing
+## 3. Decoupled Architecture: Frontend & Backend Separation
+
+The repository is organized into cleanly decoupled layers for modularity, independent scalability, and ease of hackathon portal submission:
+
+```
+ProjectTwin-MAS/
+├── frontend/                     # Pure Client UI & Command Center Layer
+│   ├── index.html                # Industrial Black & Gold Command Center
+│   ├── static/
+│   │   ├── css/style.css         # Minimalist theme, animations, dark mode
+│   │   └── js/app.js             # RBAC auth, EVM charts, speech & API client
+│   └── README.md                 # Frontend architecture and hosting instructions
+│
+├── backend/                      # Intelligence, Core Engines & Multi-Agent Layer
+│   ├── agents/                   # Ingestion, Time, Linking, and Validation Agents
+│   ├── core/                     # CPM DAG solver, EVM Engine, Institutional Memory
+│   ├── data/                     # Oil India Primavera P6 baseline, DPRs, Excel logs
+│   ├── server.py                 # FastAPI REST API & WebSocket handlers
+│   ├── run.py                    # Standalone backend launcher
+│   ├── test_projecttwin.py       # Comprehensive 12-suite automated test runner
+│   ├── requirements.txt          # Python dependencies
+│   └── README.md                 # Backend technical specs & math models
+│
+├── run.py                        # Root convenience launcher (starts server & opens UI)
+├── requirements.txt              # Root dependency reference
+└── README.md                     # Main repository documentation
+```
+
+---
+
+## 4. Confidence-Based Decision Routing
 | Confidence Score | Conflict / Precedence Anomaly | Action Taken |
 | :--- | :--- | :--- |
 | $\ge 90\%$ | No Conflicts | **Auto-Soft-Update Queue** (Committed immediately) |
@@ -42,7 +72,7 @@ While the baseline plan is defined in Primavera P6 or MS Project, actual executi
 
 ---
 
-## 4. Quick Start & Execution
+## 5. Quick Start & Execution
 
 ### Run the Server & Interactive Web Command Center
 ```bash
@@ -54,9 +84,11 @@ uv run python -m uvicorn server:app --host 127.0.0.1 --port 8000
 ```
 Open your browser at: `http://127.0.0.1:8000`
 
-### Run the Automated Test Suite
+### Run the Backend Test Suite
 ```bash
 uv run python test_projecttwin.py
+# Or inside backend:
+cd backend && uv run python test_projecttwin.py
 ```
 
 ---
