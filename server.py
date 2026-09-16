@@ -317,6 +317,83 @@ async def load_all_sample_data():
         "audit_entries": len(validation_agent.audit_log)
     }
 
+
+# -------------------- AUTHENTICATION & ROLE-BASED ACCESS --------------------
+USERS_DB = {
+    "planner@oilindia.in": {
+        "email": "planner@oilindia.in",
+        "password": "admin123",
+        "name": "R. Sharma",
+        "role": "ADMIN_PLANNER",
+        "title": "Lead Project Planner",
+        "discipline": "Project Controls",
+        "badge": "Admin / Planner",
+        "permissions": ["all", "approve_queue", "modify_actuals", "export_reports"]
+    },
+    "supervisor@oilindia.in": {
+        "email": "supervisor@oilindia.in",
+        "password": "site123",
+        "name": "Raman Borah",
+        "role": "SITE_SUPERVISOR",
+        "title": "Piping Field Supervisor",
+        "discipline": "Piping",
+        "badge": "Worker / Supervisor",
+        "permissions": ["voice_agent", "ingest_logs", "view_schedule"]
+    },
+    "civil@oilindia.in": {
+        "email": "civil@oilindia.in",
+        "password": "site123",
+        "name": "Debojit Saikia",
+        "role": "SITE_SUPERVISOR",
+        "title": "Civil Section Engineer",
+        "discipline": "Civil",
+        "badge": "Worker / Supervisor",
+        "permissions": ["voice_agent", "ingest_logs", "view_schedule"]
+    },
+    "director@oilindia.in": {
+        "email": "director@oilindia.in",
+        "password": "oil2026",
+        "name": "Dr. P. K. Goswami",
+        "role": "EXECUTIVE_AUDITOR",
+        "title": "Executive Project Director",
+        "discipline": "Management",
+        "badge": "Executive / OIL HQ",
+        "permissions": ["view_cockpit", "view_s_curve", "view_audit", "query_memory"]
+    }
+}
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+@app.post("/api/auth/login")
+async def login_user(req: LoginRequest):
+    user = USERS_DB.get(req.email.strip().lower())
+    if not user or user["password"] != req.password:
+        raise HTTPException(status_code=401, detail="Invalid credentials. Check demo accounts.")
+    return {
+        "status": "SUCCESS",
+        "user": {
+            "email": user["email"],
+            "name": user["name"],
+            "role": user["role"],
+            "title": user["title"],
+            "discipline": user["discipline"],
+            "badge": user["badge"],
+            "permissions": user["permissions"]
+        }
+    }
+
+@app.get("/api/auth/accounts")
+async def get_demo_accounts():
+    """Returns pre-configured login credentials for demonstration."""
+    return {
+        "accounts": [
+            {"email": u["email"], "password": u["password"], "role": u["role"], "badge": u["badge"], "name": u["name"], "title": u["title"]}
+            for u in USERS_DB.values()
+        ]
+    }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)

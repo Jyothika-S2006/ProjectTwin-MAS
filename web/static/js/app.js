@@ -100,8 +100,8 @@ function initCharts() {
           {
             label: "Planned Value (PV Baseline %)",
             data: [0, 8, 22, 45, 54, 75, 92, 100],
-            borderColor: "#06b6d4",
-            backgroundColor: "rgba(6, 182, 212, 0.08)",
+            borderColor: "#a1a1aa",
+            backgroundColor: "rgba(161, 161, 170, 0.04)",
             borderWidth: 2,
             tension: 0.35,
             fill: true,
@@ -110,7 +110,7 @@ function initCharts() {
           {
             label: "Claimed Progress (% Self-Reported)",
             data: [0, 7, 21, 42, 46, null, null, null],
-            borderColor: "#f59e0b",
+            borderColor: "#eab308",
             borderDash: [5, 5],
             borderWidth: 2,
             tension: 0.35,
@@ -120,8 +120,8 @@ function initCharts() {
           {
             label: "Earned Value (EV Evidence-Verified %)",
             data: [0, 6, 19, 36, 41, null, null, null],
-            borderColor: "#10b981",
-            backgroundColor: "rgba(16, 185, 129, 0.15)",
+            borderColor: "#d4af37",
+            backgroundColor: "rgba(212, 175, 55, 0.12)",
             borderWidth: 3,
             tension: 0.35,
             fill: true,
@@ -170,7 +170,7 @@ function initCharts() {
         labels: ["Operational (Crane / Equip)", "Material Shortage", "Approval / Inspection", "Weather / Rain"],
         datasets: [{
           data: [4, 3, 2, 2],
-          backgroundColor: ["#f43f5e", "#f59e0b", "#6366f1", "#06b6d4"],
+          backgroundColor: ["#d4af37", "#a16207", "#71717a", "#3f3f46"],
           borderWidth: 0
         }]
       },
@@ -718,5 +718,121 @@ async function fetchAuditLogs() {
     });
   } catch (err) {
     console.error("Error fetching audit logs:", err);
+  }
+}
+
+
+// -------------------- ROLE-BASED AUTHENTICATION LOGIC --------------------
+let currentUser = {
+  email: "planner@oilindia.in",
+  name: "R. Sharma",
+  role: "ADMIN_PLANNER",
+  title: "Lead Project Planner",
+  badge: "Admin / Planner",
+  icon: "??"
+};
+
+function openLoginModal() {
+  const m = document.getElementById("login-modal");
+  if (m) m.classList.remove("hidden");
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeLoginModal() {
+  const m = document.getElementById("login-modal");
+  if (m) m.classList.add("hidden");
+}
+
+async function quickLogin(email, password) {
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: password })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      applyUserRole(data.user);
+    } else {
+      // Standalone Netlify fallback
+      applyUserRoleFallback(email);
+    }
+  } catch (err) {
+    applyUserRoleFallback(email);
+  }
+}
+
+function applyUserRoleFallback(email) {
+  if (email.includes("supervisor")) {
+    applyUserRole({
+      email: "supervisor@oilindia.in",
+      name: "Raman Borah",
+      role: "SITE_SUPERVISOR",
+      title: "Piping Field Supervisor",
+      badge: "Worker / Supervisor",
+      discipline: "Piping"
+    });
+  } else if (email.includes("civil")) {
+    applyUserRole({
+      email: "civil@oilindia.in",
+      name: "Debojit Saikia",
+      role: "SITE_SUPERVISOR",
+      title: "Civil Section Engineer",
+      badge: "Worker / Supervisor",
+      discipline: "Civil"
+    });
+  } else if (email.includes("director")) {
+    applyUserRole({
+      email: "director@oilindia.in",
+      name: "Dr. P. K. Goswami",
+      role: "EXECUTIVE_AUDITOR",
+      title: "Executive Project Director",
+      badge: "Executive / OIL HQ"
+    });
+  } else {
+    applyUserRole({
+      email: "planner@oilindia.in",
+      name: "R. Sharma",
+      role: "ADMIN_PLANNER",
+      title: "Lead Project Planner",
+      badge: "Admin / Planner"
+    });
+  }
+}
+
+function applyUserRole(user) {
+  currentUser = user;
+  const iconMap = {
+    "ADMIN_PLANNER": "??",
+    "SITE_SUPERVISOR": "??",
+    "EXECUTIVE_AUDITOR": "???"
+  };
+  currentUser.icon = iconMap[user.role] || "??";
+
+  document.getElementById("user-display-name").textContent = user.name;
+  document.getElementById("user-role-badge").textContent = user.badge;
+  document.getElementById("user-role-icon").textContent = currentUser.icon;
+
+  closeLoginModal();
+  showToast("Role Switched", `Logged in as ${user.name} (${user.badge})`);
+
+  // Adapt UI based on role
+  if (user.role === "SITE_SUPERVISOR") {
+    switchTab("time-agent");
+    const nameInput = document.getElementById("agent-supervisor-name");
+    if (nameInput) nameInput.value = `${user.name} (${user.title})`;
+    if (user.discipline) {
+      const discSelect = document.getElementById("agent-discipline-select");
+      if (discSelect) discSelect.value = user.discipline;
+    }
+  } else if (user.role === "EXECUTIVE_AUDITOR") {
+    switchTab("cockpit");
+  } else {
+    switchTab("planner");
+  }
+
+  // Refresh planner queue view with updated permissions
+  if (typeof fetchPlannerQueue === "function") {
+    fetchPlannerQueue();
   }
 }

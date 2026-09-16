@@ -4,3 +4,6 @@ __pycache__/
 *.pyo
 temp_*
 .DS_Store
+
+cloudflared.exe
+*.zip
