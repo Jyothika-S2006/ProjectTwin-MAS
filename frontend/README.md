@@ -1,4 +1,4 @@
-﻿# ProjectTwin - Frontend Client (Command Center)
+# ProjectTwin - Frontend Client (Command Center)
 
 ### Problem Statement: SIH26122 | Oil India Limited | Team SentinelX3.0
 
@@ -33,13 +33,17 @@ frontend/
 ---
 
 ## How to Run & Deploy
-### Option 1: Live with ProjectTwin Backend
+### Option 1: Live Cloud Deployment (24/7 on Vercel)
+The production app is live at:
+👉 **[https://projecttwin.vercel.app](https://projecttwin.vercel.app)**
+
+### Option 2: Live with Local ProjectTwin Backend
 When the FastAPI backend is running (`uv run python -m uvicorn server:app`), the frontend is served directly at:
 ```
 http://127.0.0.1:8000/
 ```
 
-### Option 2: Standalone Static Hosting (Netlify / Vercel / GitHub Pages)
+### Option 3: Standalone Static Hosting (Netlify / GitHub Pages)
 Because the frontend is pure HTML5, CSS3, and modern JavaScript:
 - Drag and drop this `frontend/` folder directly into https://app.netlify.com/drop
 - Or open `index.html` directly in your web browser.

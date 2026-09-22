@@ -7,3 +7,4 @@ temp_*
 
 cloudflared.exe
 *.zip
+.vercel

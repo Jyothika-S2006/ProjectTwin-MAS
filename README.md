@@ -3,7 +3,13 @@
 **Organization**: Oil India Limited  
 **Category**: Software | **Theme**: Smart Automation  
 **Team**: SentinelX3.0  
-**Pitch**: *From Fragmented Field Updates to Trusted Project Intelligence*
+**Pitch**: *From Fragmented Field Updates to Trusted Project Intelligence*  
+**Live Production URL (24/7 Cloud)**: [https://projecttwin.vercel.app](https://projecttwin.vercel.app)
+
+> **Live Demo Logins (Role-Based Access Control)**:
+> - **Lead Planner (Admin)**: `planner@oilindia.in` | Password: `admin123`
+> - **Site Supervisor (Worker)**: `supervisor@oilindia.in` | Password: `site123`
+> - **Executive Director**: `director@oilindia.in` | Password: `oil2026`
 
 ---
 
