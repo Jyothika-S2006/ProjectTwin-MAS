@@ -4,7 +4,7 @@
 **Category**: Software | **Theme**: Smart Automation  
 **Team**: SentinelX3.0  
 **Pitch**: *From Fragmented Field Updates to Trusted Project Intelligence*  
-**Live Demo URL**: [https://split-stem-award-hispanic.trycloudflare.com](https://split-stem-award-hispanic.trycloudflare.com)
+**Live Demo URL**: [https://jimmy-passes-cir-excitement.trycloudflare.com](https://jimmy-passes-cir-excitement.trycloudflare.com)
 
 > **Live Demo Logins (Role-Based Access Control)**:
 > - **Lead Planner (Admin)**: `planner@oilindia.in` | Password: `admin123`
