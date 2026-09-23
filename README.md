@@ -4,7 +4,7 @@
 **Category**: Software | **Theme**: Smart Automation  
 **Team**: SentinelX3.0  
 **Pitch**: *From Fragmented Field Updates to Trusted Project Intelligence*  
-**Live Demo URL**: [https://jimmy-passes-cir-excitement.trycloudflare.com](https://jimmy-passes-cir-excitement.trycloudflare.com)
+**Live Production URL (24/7 Cloud)**: [https://projecttwin.vercel.app](https://projecttwin.vercel.app)
 
 > **Live Demo Logins (Role-Based Access Control)**:
 > - **Lead Planner (Admin)**: `planner@oilindia.in` | Password: `admin123`
