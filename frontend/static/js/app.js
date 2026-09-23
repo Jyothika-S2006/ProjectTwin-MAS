@@ -316,6 +316,7 @@ function renderClientSideFallback() {
       </div>
     `).join("");
   }
+}
 
 async function loadDemoDataset() {
   const btn = document.getElementById("load-demo-btn");
