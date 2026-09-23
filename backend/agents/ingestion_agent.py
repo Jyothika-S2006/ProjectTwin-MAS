@@ -1,7 +1,6 @@
-﻿import re
+import re
 import uuid
 from typing import List, Dict, Any, Optional
-import pandas as pd
 from core.models import RawExecutionEvent
 
 class IngestionAgent:
@@ -114,17 +113,36 @@ class IngestionAgent:
 
     def ingest_excel(self, filepath: str, discipline_hint: str = "General") -> List[RawExecutionEvent]:
         """
-        Ingests multi-column discipline spreadsheets (.xlsx or .csv) and normalizes them into RawExecutionEvents.
+        Ingests multi-column discipline spreadsheets (.xlsx or .csv) using pure-Python openpyxl / csv.
         """
+        import csv
         events = []
+        rows = []
+
         if filepath.endswith(".xlsx") or filepath.endswith(".xls"):
-            df = pd.read_excel(filepath)
+            import openpyxl
+            wb = openpyxl.load_workbook(filepath, data_only=True)
+            sheet = wb.active
+            headers = [str(cell.value or "").strip() for cell in sheet[1]]
+            for r in sheet.iter_rows(min_row=2, values_only=True):
+                if any(r):
+                    row_dict = {}
+                    for h, v in zip(headers, r):
+                        if h:
+                            row_dict[h] = "" if v is None else v
+                    rows.append(row_dict)
         else:
-            df = pd.read_csv(filepath)
+            with open(filepath, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                rows = list(reader)
+
+        if not rows:
+            return events
 
         # Standardize column headers
         col_map = {}
-        for col in df.columns:
+        first_row = rows[0]
+        for col in first_row.keys():
             c_low = str(col).lower().replace(" ", "_")
             if "date" in c_low:
                 col_map["date"] = col
@@ -149,7 +167,7 @@ class IngestionAgent:
         elif "elec" in filepath.lower():
             disc = "Electrical"
 
-        for idx, row in df.iterrows():
+        for idx, row in enumerate(rows):
             row_date = str(row.get(col_map.get("date"), "2026-11-08"))
             act_desc = str(row.get(col_map.get("activity"), f"Activity on row {idx+1}"))
             line_no = str(row.get(col_map.get("line"), "")) if "line" in col_map else ""
@@ -158,9 +176,10 @@ class IngestionAgent:
 
             # Calculate progress
             prog_val = 50.0
-            if "progress" in col_map and pd.notna(row.get(col_map["progress"])):
+            raw_prog = row.get(col_map.get("progress"))
+            if raw_prog not in (None, ""):
                 try:
-                    prog_val = float(str(row[col_map["progress"]]).replace("%", "").strip())
+                    prog_val = float(str(raw_prog).replace("%", "").strip())
                 except ValueError:
                     prog_val = 50.0
             elif "completed" in status_raw.lower() or "erected & bolted" in status_raw.lower():
@@ -180,7 +199,7 @@ class IngestionAgent:
                 delay_cat = "Weather"
 
             full_desc = f"{line_no} {act_desc}".strip()
-            if remarks and remarks != "nan":
+            if remarks and remarks.lower() != "nan":
                 full_desc += f" - {remarks}"
 
             evt = RawExecutionEvent(
