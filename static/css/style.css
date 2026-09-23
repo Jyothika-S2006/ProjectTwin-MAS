@@ -1,0 +1,157 @@
+﻿:root {
+  --bg-pure: #09090b;
+  --bg-card: #121215;
+  --bg-card-hover: #18181c;
+  --border-subtle: #27272a;
+  --border-gold: rgba(212, 175, 55, 0.35);
+  --gold-primary: #d4af37;
+  --gold-light: #fef08a;
+  --gold-dark: #b48c26;
+  --gold-glow: rgba(212, 175, 55, 0.12);
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-dim: #71717a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-pure);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+/* Minimalist Solid Matte Card (No Glassmorphism / No Blur) */
+.glass-panel, .minimal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.glass-panel:hover, .minimal-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Tabs */
+.tab-btn {
+  transition: all 0.15s ease;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.tab-btn:hover {
+  color: var(--text-main);
+}
+.tab-btn.active {
+  border-bottom: 2px solid var(--gold-primary);
+  color: var(--gold-primary);
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn-gold {
+  background: #d4af37;
+  color: #09090b;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #eab308;
+  transition: all 0.15s ease;
+}
+.btn-gold:hover {
+  background: #eab308;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+.btn-secondary {
+  background: #18181b;
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+}
+
+/* Voice pulse */
+@keyframes gold-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+.recording-pulse {
+  animation: gold-pulse 1.6s infinite;
+  border-color: var(--gold-primary) !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-auto { 
+  background: rgba(212, 175, 55, 0.1); 
+  color: #fef08a; 
+  border: 1px solid rgba(212, 175, 55, 0.35); 
+}
+.badge-planner { 
+  background: rgba(245, 158, 11, 0.1); 
+  color: #fbbf24; 
+  border: 1px solid rgba(245, 158, 11, 0.35); 
+}
+.badge-supervisor { 
+  background: rgba(244, 63, 94, 0.1); 
+  color: #fb7185; 
+  border: 1px solid rgba(244, 63, 94, 0.35); 
+}
+.badge-critical { 
+  background: rgba(239, 68, 68, 0.12); 
+  color: #f87171; 
+  border: 1px solid rgba(239, 68, 68, 0.35); 
+}
+
+/* Clean Gold Hairline Table Styling */
+table {
+  border-collapse: collapse;
+}
+th {
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 600;
+}
+td {
+  border-bottom: 1px solid #18181b;
+}
