@@ -33,9 +33,9 @@ frontend/
 ---
 
 ## How to Run & Deploy
-### Option 1: Live Cloud Deployment (24/7 on Vercel)
-The production app is live at:
-👉 **[https://projecttwin.vercel.app](https://projecttwin.vercel.app)**
+### Option 1: Live Demo Link
+The live system is currently running at:
+👉 **[https://split-stem-award-hispanic.trycloudflare.com](https://split-stem-award-hispanic.trycloudflare.com)**
 
 ### Option 2: Live with Local ProjectTwin Backend
 When the FastAPI backend is running (`uv run python -m uvicorn server:app`), the frontend is served directly at:
