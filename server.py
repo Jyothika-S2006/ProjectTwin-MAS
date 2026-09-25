@@ -18,6 +18,7 @@ from agents.time_agent import TimeAgent
 from agents.linking_agent import HybridLinkingAgent
 from agents.validation_agent import ValidationAgent
 from core.models import RoutingStatus
+from core.langgraph_orchestrator import ProjectTwinLangGraphOrchestrator
 
 app = FastAPI(
     title="ProjectTwin API - Real-Time Actual Progress Tracking",
@@ -66,8 +67,14 @@ ingestion_agent = IngestionAgent()
 time_agent = TimeAgent()
 evm_engine = EVMEngine(schedule_engine)
 memory_engine = InstitutionalMemoryEngine(os.path.join(data_dir, "projecttwin_memory.db"))
+langgraph_orchestrator = ProjectTwinLangGraphOrchestrator(schedule_engine, evm_engine)
 
 # Models for API
+class LangGraphOrchestrateRequest(BaseModel):
+    message: str
+    supervisor_name: str = "Site Supervisor"
+    discipline: Optional[str] = "Piping"
+
 class TimeAgentRequest(BaseModel):
     message: str
     supervisor_name: str = "Site Supervisor"
@@ -182,6 +189,25 @@ async def match_text(req: MatchQueryRequest):
         "query": req.query,
         "discipline": req.discipline,
         "candidates": [c.model_dump() for c in candidates]
+    }
+
+@app.post("/api/langgraph/orchestrate")
+async def orchestrate_langgraph(req: LangGraphOrchestrateRequest):
+    """Executes stateful LangGraph StateGraph orchestration pipeline for SIH26122."""
+    result = langgraph_orchestrator.execute(
+        message=req.message,
+        supervisor=req.supervisor_name,
+        discipline=req.discipline or "General"
+    )
+    return {
+        "routing_decision": result["routing_decision"].value if result["routing_decision"] else None,
+        "is_anomaly": result["is_anomaly"],
+        "requires_human_signoff": result["requires_human_signoff"],
+        "evidence_hash": result["evidence_hash"],
+        "top_candidates": [c.model_dump() for c in result["candidates"]],
+        "routing_reasons": result["routing_reasons"],
+        "execution_step_log": result["execution_step_log"],
+        "parsed_event": result["parsed_event"].model_dump() if result["parsed_event"] else None
     }
 
 @app.get("/api/planner/queue")

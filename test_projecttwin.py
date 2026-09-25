@@ -1,4 +1,4 @@
-﻿import os
+import os
 import sys
 import unittest
 
@@ -128,6 +128,47 @@ class TestProjectTwin(unittest.TestCase):
         self.assertGreater(len(insights), 0)
         print(f"[Test 8 Passed] Institutional Memory verified: {len(benchmarks)} discipline benchmarks, {len(delays)} delay categories.")
 
+    def test_09_langgraph_orchestrator(self):
+        """Validates end-to-end LangGraph StateGraph orchestration on Oil India Line 24 spool erection."""
+        from core.langgraph_orchestrator import ProjectTwinLangGraphOrchestrator, LANGGRAPH_AVAILABLE
+
+        self.assertTrue(LANGGRAPH_AVAILABLE, "LangGraph should be installed and importable.")
+        orchestrator = ProjectTwinLangGraphOrchestrator(self.schedule, self.evm)
+        self.assertIsNotNone(orchestrator.compiled_graph, "LangGraph StateGraph should compile successfully.")
+
+        msg = "Completed erection of Line 24 piping spool section A on rack PR-04 at Duliajan manifold area today, 100% done"
+        result = orchestrator.execute(msg, supervisor="Ramesh Sharma", discipline="Piping")
+
+        # 1. Parameter extraction check
+        self.assertIsNotNone(result["parsed_event"])
+        self.assertEqual(result["parsed_event"].discipline, "Piping")
+        self.assertEqual(result["parsed_event"].progress_pct, 100.0)
+
+        # 2. Activity match check
+        self.assertGreater(len(result["candidates"]), 0)
+        top_cand = result["candidates"][0]
+        self.assertEqual(top_cand.activity_id, "ACT-PIP-104")
+        self.assertGreaterEqual(top_cand.composite_confidence, 90.0)
+
+        # 3. Anomaly detection check (predecessors ACT-PIP-102 and ACT-PIP-103 not completed)
+        self.assertTrue(result["is_anomaly"])
+        self.assertTrue(result["requires_human_signoff"])
+
+        # 4. Cryptographic SHA-256 evidence hash check
+        self.assertIsNotNone(result["evidence_hash"])
+        self.assertEqual(len(result["evidence_hash"]), 64)
+
+        # 5. Routing status check
+        self.assertEqual(result["routing_decision"], RoutingStatus.PLANNER_REVIEW)
+        self.assertIn("plannerreviewnode", result["execution_step_log"][-1].lower())
+
+        print(
+            f"[Test 9 Passed] LangGraph Orchestrator: Matched {top_cand.activity_id} ({top_cand.composite_confidence:.1f}%), "
+            f"Precedence Anomaly Caught, SHA-256 Hash Generated, Routed to {result['routing_decision'].value}!"
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
+
 
